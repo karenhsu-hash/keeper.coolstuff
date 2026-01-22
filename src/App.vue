@@ -189,6 +189,20 @@ const formatPainPointText = (text) => {
 const formatCasePoint = (text) => {
   return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#5D4037]">$1</strong>')
 }
+
+// Helper function to get correct image path with base URL
+const getImagePath = (path) => {
+  if (!path) return ''
+  // If it's already a full URL (http/https), return as is
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path
+  }
+  // For relative paths, add base URL
+  const base = import.meta.env.BASE_URL
+  // Remove leading slash from path if present, then combine with base
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return `${base}${cleanPath}`
+}
 </script>
 
 <template>
@@ -227,7 +241,7 @@ const formatCasePoint = (text) => {
     >
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
         <div class="flex items-center gap-2 md:gap-3">
-          <img :src="siteContent.assets.logo" alt="酷存助手 Logo" class="h-8 w-auto md:h-10" />
+          <img :src="getImagePath(siteContent.assets.logo)" alt="酷存助手 Logo" class="h-8 w-auto md:h-10" />
           <div class="text-sm font-medium tracking-wide text-[#4E342E] md:text-base">
             {{ siteContent.brand.name }}
           </div>
@@ -285,7 +299,7 @@ const formatCasePoint = (text) => {
             <div class="scroll-reveal flex items-center justify-center">
               <div class="relative w-full max-w-md overflow-hidden rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.05)]">
                 <img
-                  src="/images/hero-banner.jpg"
+                  :src="getImagePath(siteContent.assets.heroMain)"
                   alt="LINE 備份與雲端同步解決方案"
                   class="h-auto w-full object-cover"
                 />
@@ -340,7 +354,7 @@ const formatCasePoint = (text) => {
             <!-- Image -->
             <div class="scroll-reveal flex items-center justify-center">
               <img
-                :src="siteContent.painPoint.image"
+                :src="getImagePath(siteContent.painPoint.image)"
                 alt="解決照片遺失問題 - 酷存助手"
                 class="h-auto w-full max-w-full object-contain"
               />
@@ -496,7 +510,7 @@ const formatCasePoint = (text) => {
                 <div>
                   <p class="text-xl font-semibold text-[#3C3C3C] md:text-2xl lg:text-xl">{{ plan.name }}</p>
                   <div class="mt-3 flex items-baseline gap-2 md:mt-4 md:gap-3">
-                    <p class="text-3xl font-bold text-[#6F4E37] md:text-4xl lg:text-5xl">{{ plan.price }}</p>
+                    <p class="text-3xl font-bold text-[#6F4E37] md:text-4xl lg:text-4xl">{{ plan.price }}</p>
                     <p v-if="plan.originalPrice" class="text-base text-[#6B5E55] line-through md:text-lg lg:text-base">
                       {{ plan.originalPrice }}
                     </p>

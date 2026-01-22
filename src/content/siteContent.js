@@ -9,7 +9,7 @@ const siteContent = {
     heroMain: '/images/hero-banner.jpg',
     heroSupport: 'https://source.unsplash.com/featured/800x600/?clean,aesthetic,photography',
   },
-  nav: ['服務介紹', '方案與價格', '實際案例', '常見問題', '首次申請'],
+  nav: ['服務介紹', '方案與價格', '實際案例', '常見問題'],
   hero: {
     headline: '告別過期與混亂，打造您的 LINE 智慧雲端庫',
     description:
